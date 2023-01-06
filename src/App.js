@@ -4,7 +4,9 @@ import { useEffect, useState } from "react";
 const url = process.env.REACT_APP_API_URL || `localhost:8080`;
 
 function App() {
-  const [apiDependantState, setApiDependantState] = useState([]);
+  const [apiDependantState, setApiDependantState] = useState({
+    message: `NO API DATA LOADED YET`,
+  });
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -25,7 +27,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {apiDependantState}
+          {JSON.stringify(apiDependantState)}
         </a>
       </header>
     </div>
