@@ -5,7 +5,10 @@ const url = process.env.REACT_APP_API_URL || `localhost:8080`;
 
 function App() {
   const [apiDependantState, setApiDependantState] = useState({
-    message: `NO API DATA LOADED YET`,
+    message: `NO API CONNECTION LOADED YET`,
+  });
+  const [dbDependantState, setDbDependantState] = useState({
+    message: `NO DB DATA RETRIEVED FROM API YET`,
   });
   useEffect(() => {
     fetch(url)
@@ -14,6 +17,13 @@ function App() {
         setApiDependantState(data);
       });
   }, []);
+  useEffect(() => {
+    fetch(`${url}/cats`)
+      .then((res) => res.json())
+      .then((data) => {
+        setDbDependantState(data);
+      });
+  }, [apiDependantState]);
   return (
     <div className="App">
       <header className="App-header">
@@ -27,7 +37,10 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
+          <h1> API CONNECTION INFO </h1>
           {JSON.stringify(apiDependantState)}
+          <h1> DB FUNCTION INFO </h1>
+          {JSON.stringify(dbDependantState)}
         </a>
       </header>
     </div>
