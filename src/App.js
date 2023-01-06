@@ -1,7 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useEffect, useState } from "react";
+const url = process.env.REACT_APP_API_URL || `localhost:8080`;
 
 function App() {
+  const [apiDependantState, setApiDependantState] = useState([]);
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setApiDependantState(data);
+      });
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
@@ -15,7 +25,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          {apiDependantState}
         </a>
       </header>
     </div>
