@@ -1,7 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
-const url = process.env.REACT_APP_API_URL || `localhost:8080`;
+const url = process.env.REACT_APP_API_URL || `localhost:8080/`;
 
 function App() {
   const [apiDependantState, setApiDependantState] = useState({
@@ -18,7 +18,7 @@ function App() {
       });
   }, []);
   useEffect(() => {
-    fetch(`${url}/cats`)
+    fetch(`${url}cats`)
       .then((res) => res.json())
       .then((data) => {
         setDbDependantState(data);
