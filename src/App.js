@@ -15,6 +15,9 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setApiDependantState(data);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }, []);
   useEffect(() => {
@@ -22,15 +25,16 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setDbDependantState(data);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }, [apiDependantState]);
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+        <p>Experimental Heroku Client</p>
         <a
           className="App-link"
           href="https://reactjs.org"
